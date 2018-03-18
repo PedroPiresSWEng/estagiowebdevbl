@@ -1,0 +1,77 @@
+<html ng-app="taxTransport">
+<head>
+	<body>
+		<script src="C:\nodejs\js\freteCalculadora\script.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	</body>
+	<title>Calcule o Seu Frete</title>
+		<style>
+		.jumbotron{
+			width: 500px;
+			text-align: center;
+			margin-top: 20px;
+			margin-left: auto;
+			margin-right: auto;
+			background-size: auto;
+		}
+		.table {
+			margin-top: 20px;
+		}
+		.form-control {
+			margin-bottom: 10px;
+		}
+		.negrito {
+			font-weight: bold;
+		}
+		</style>
+		<script>
+		angular.module("taxTransport", []);
+		/*ngController faz o vínculo entre a View e o Controller. Não é a única opção pra realizar este vínculo*/
+		angular.module("taxTransport").controller("taxTransportCtrl", function ($scope){
+		/*localizar um módulo e registrar o controller. Scope faz a mediação da relação entre view e controller*/
+			$scope.app = "Calculadora de Frete";
+			/*ngBind substitui um elemento por uma expressão*/
+			$scope.taxaFretes = [ /*array de taxaFretes*/
+			];
+
+			$scope.adicionarTaxa = function (taxaFrete){
+				/*$scope.taxaFretes.push({nomeSaida: $scope.nomeSaida, CEP: $scope.CEP}) // Infere um final de array - Evitar ler o scope na linha do controller*/ 
+				$scope.taxaFretes.push(taxaFrete);
+				dados = $scope.taxaFretes;
+				enviarDados(taxaFrete);
+				delete $scope.taxaFrete;
+			};
+		});
+		</script>
+</head>
+<body ng-controller="taxTransportCtrl">
+	<div class="jumbotron">
+		<h3>{{app}}</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Nome do Remetente</th>
+				<th>CEP de Saida</th>				
+				<th>Nome do Destinatario</th>
+				<th>CEP de Destino</th>
+			</tr>
+			<tr ng-repeat="taxaFrete in taxaFretes">
+				<td>{{taxaFrete.nomeSaida}}</td>
+				<td>{{taxaFrete.CEPSaida}}</td>
+				<td>{{taxaFrete.nomeDestino}}</td>
+				<td>{{taxaFrete.CEPDestino}}</td>				
+					<script>
+						/*Chave dupla é a interpolação da expressão. A expression permite concatenar valores e expressões*/
+				</script>
+			</tr>
+		</table>
+		<hr/>
+		<input class="form-control" type="text" ng-model="taxaFrete.nomeSaida" placeholder="Nome do Remetente" />
+		<input class="form-control" type="text" ng-model="taxaFrete.CEPSaida" placeholder="CEP de Saida" />
+		<input class="form-control" type="text" ng-model="taxaFrete.nomeDestino" placeholder="Nome do Destinatario" />		
+		<input class="form-control" type="text" ng-model="taxaFrete.CEPDestino" placeholder="CEP de Destino" />
+		<button class="btn btn-primary btn-block" ng-click="adicionarTaxa(taxaFrete)" ng-disabled="!taxaFrete.nomeSaida || !taxaFrete.CEPSaida || !taxaFrete.nomeDestino || !taxaFrete.CEPDestino">Calcular Taxa de Frete</button>
+	</div>
+
+</body>
+</html>
