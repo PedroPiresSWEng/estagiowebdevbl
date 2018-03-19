@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <title>Calculadora de Fretes></title>
+    
+  </head> 
+  <body> 
+    <div class="container" ng-app="frontCalculadora" ng-controller="ShippingController"> <!-- Divs organizam o HTML --> 
+    	<div class="row"> <!-- Linha dentro do container-->
+    		<div class="col-12"> <!-- Vai ocupar 12 colunas das 12 existentes -->
+    			<h1>Calculadora de Fretes</h1>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-12">
+    			<form>
+    				<div class="form-group">
+    					<label>
+    						Nome do Remetente: 
+    					</label>
+    					<input type="text" class="form-control" id="nameSender" ng-model="nameSender" placeholder="Nome do Remetente">
+    				</div>
+    				<div class="form-group">
+    					<label>
+    						CEP do Remetente: 
+    					</label>
+    					<input type="text" class="form-control" id="cepSender" ng-model="cepSender" placeholder="CEP do Remetente">
+    					</div>
+    				<div class="form-group">
+    					<label>
+    						Nome do Destinatário: 
+    					</label>
+    					<input type="text" class="form-control" id="nameRecipient" ng-model="nameRecipient" placeholder="Nome do Destinatário">
+    				</div>
+    				<div class="form-group">
+    					<label>
+    						CEP do Destinatário: 
+    					</label>
+    					<input type="text" class="form-control" id="cepRecipient" ng-model="cepRecipient" placeholder="CEP do Destinatário">
+    				</div>
+    				<button type="button" class="btn btn-primary " ng-click='postShipping()'>
+    					Enviar
+    				</button>
+    			</form>
+    		</div>
+    	</div>
+    	<div class="row"> <!-- Feita para apresentar apenas os títulos dos campos -->
+    		<div class="col-3">
+    			<h4>
+    				Cep Remetente
+    			</h4>
+    		</div>
+    		<div class="col-3">
+    			<h4>
+    				Cep Destinatário
+    			</h4>
+    		</div>
+    		<div class="col-3">
+    			<h4>
+    				Data de Entrega
+    			</h4>
+    		</div>
+    		<div class="col-3">
+    			<h4>
+    				Preço do Frete
+    			</h4>
+    		</div>
+    	</div>
+    	<div class="row" ng-repeat="shipping in shippings"> <!-- Feita para apresentar apenas os títulos dos campos -->
+    		<div class="col-3">
+    			<p>
+    				{{shipping.cepSender}}
+    			</p>
+    		</div>
+    		<div class="col-3">
+    			<p>
+    				{{shipping.cepRecipient}}
+    			</p>
+    		</div>
+    		<div class="col-3">
+    			<p>
+    				{{shipping.dateArrive}}
+    			</p>
+    		</div>
+    		<div class="col-3">
+    			<p>
+    				{{shipping.taxPrice}}
+    			</p>
+    		</div>
+    	</div>
+    </div>
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+  </body>
+</html>
